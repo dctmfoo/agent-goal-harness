@@ -6,6 +6,43 @@ repository, then delete this file. The **machinery** (control channel, inbox, st
 heartbeat, resume protocol, commit discipline) ships ready to use — do not redesign it.
 The **content** (charter, anchor, unit of work, findings docs) is what you adapt.
 
+## First: which adoption mode?
+
+- **Fresh repo** — the goal gets its own new repository, built from this template. Follow
+  Steps 0–6 as written.
+- **Existing repo** — the human already has a repository and wants the harness added to run
+  a goal inside it. Their repository is theirs: adopt **minimally and additively**. Follow
+  Steps 0–6 with the "Existing repo" adjustments below each step, and read the
+  "Existing-repo rules" section first.
+
+If the human hasn't said which, look at where you are: a non-empty repository with its own
+history, code, or docs means existing-repo mode. When in doubt, ask.
+
+## Existing-repo rules (minimal overlay)
+
+1. **One directory.** Place the entire harness under a single top-level directory, `harness/`
+   by default (another name if the human prefers): `harness/CHARTER.md`,
+   `harness/OPERATING-LOOP.md`, `harness/control/`, `harness/inbox/`, `harness/work/`,
+   `harness/findings/`. Update every internal path reference accordingly.
+2. **Touch at most one existing file.** If the repo has an agent anchor (`AGENTS.md`,
+   `CLAUDE.md`, or equivalent), append a short pointer block (≤6 lines): the goal in one
+   line, "harness protocol in `harness/` is binding for this run", and the resume read
+   order. If there is no anchor, create a thin `AGENTS.md` from this template's version
+   with paths pointed at `harness/`. That is the only file outside `harness/` you create
+   or modify — not their `README.md`, `LICENSE`, CI, code, or structure.
+3. **`.gitignore` additions only if needed** (e.g. harness scratch paths), appended, never
+   rewritten.
+4. **Write a short `harness/README.md`** as the harness entry point: the goal in a
+   paragraph, a map of the harness files, and a pointer to the charter. The kickoff prompt
+   will name this file as the entry doc.
+5. **Do not reorganize, rename, or "improve" anything that was already there.** If the
+   goal genuinely requires changing existing project files, that is run work for the
+   executing agent under the charter — not adoption work.
+6. Commit the overlay as a single commit; do not mix it with any other change to the repo.
+
+In existing-repo mode, read every root-relative path in Steps 1–5 (`CHARTER.md`, `control/`,
+`work/`, …) as living under `harness/`.
+
 ## Step 0 — understand the goal
 
 If the human's goal statement leaves any of these unclear, ask before writing:
@@ -58,10 +95,12 @@ place: it exists so a later reader learns something durable without replaying th
 ## Step 6 — finish
 
 1. Update `README.md`: replace the template description with a short description of this
-   project (keep or trim the "how it works" material as you see fit).
+   project (keep or trim the "how it works" material as you see fit). *Existing repo:* leave
+   their `README.md` alone; write `harness/README.md` instead (Existing-repo rule 4).
 2. Check `.gitignore` fits the goal (secrets, scratch, build output). **Never commit
    credentials or secrets**, regardless of what else changes.
-3. Delete this `ADOPTION.md`.
+3. Delete this `ADOPTION.md`. *Existing repo:* don't copy it in at all — it stays behind in
+   the template clone.
 4. Initialize `control/AGENT-STATE.md` and `control/HEARTBEAT.md` from their templates with
    real initial values (`directives_acked: none`, first unit/next action).
 5. Commit everything as `adopted: <goal, one line>` — this commit is the run's baseline.
@@ -71,11 +110,12 @@ place: it exists so a later reader learns something durable without replaying th
 7. End your report with the **kickoff prompt** for the human to copy-paste into the executing
    agent (Codex, Claude Code, …) when they are ready to start the run. The prompt is a
    constant — the actual goal lives in the repository files, so the prompt itself never
-   carries goal-specific content. Substitute only the project name and absolute path:
+   carries goal-specific content. Substitute only the project name, absolute path, and entry
+   doc (`README.md` for a fresh repo; `harness/README.md` for an existing repo):
 
    ```
    /goal You are the executing agent for <project name> at <absolute repo path>. Read its
-   README.md and follow the doc set from there — the charter's invariants and the control/
+   <entry doc> and follow the doc set from there — the charter's invariants and the control
    protocol (directives, heartbeat, state) are binding from your first action; everything
    else is your judgment. Begin at OPERATING-LOOP step 0. This will be a long run: keep the
    heartbeat, ledger, and commits current so it can be monitored and resumed at any point.

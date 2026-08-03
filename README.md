@@ -32,11 +32,21 @@ the previous one stopped. No long-document re-reads, no reconstruction from chat
 
 ## How to use it
 
-1. **Start a session with your coding agent** (Claude Code, Codex, …) in an empty project
-   directory, and say something like:
+1. **Start a session with your coding agent** (Claude Code, Codex, …) and point it at the
+   template. For a **new project**, in an empty directory:
 
    > Clone https://github.com/dctmfoo/agent-goal-harness as the base for a new project.
    > Read its ADOPTION.md and adopt it for this goal: <describe your goal>.
+
+   For an **existing repository**, in that repo:
+
+   > Clone https://github.com/dctmfoo/agent-goal-harness somewhere temporary, read its
+   > ADOPTION.md, and adopt it into this repository in existing-repo mode for this goal:
+   > <describe your goal>.
+
+   Existing-repo mode is a minimal overlay: the whole harness lands under a single
+   `harness/` directory plus a short pointer in your agent anchor file — nothing else in
+   your repo is touched or reorganized.
 
 2. **The agent adopts the template**: it fills in `CHARTER.md` and `AGENTS.md` for your goal,
    names the unit of work, trims what the goal doesn't need, deletes `ADOPTION.md`, and commits.
