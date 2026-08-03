@@ -74,9 +74,11 @@ The procedure, all in place:
    ledger, and any unresolved `inbox/` items. If the old run looks mid-flight or has open
    blocked items, stop and ask the human whether it is abandoned, done, or to be resumed —
    never overwrite a live run's state on an inference.
-2. **Tag the final commit:** `git tag run-<n>-<goal-slug>` (next free `n`). This is the one
-   pointer to the complete previous run; anything from it is recoverable later with
-   `git show run-<n>-<slug>:<path>`.
+2. **Ensure the finished run is tagged.** The executing agent tags its own completion
+   (OPERATING-LOOP "Stopping"), so a `run-<n>-<goal-slug>` tag usually already exists —
+   verify with `git tag -l 'run-*'`. If it's missing, tag the run's final commit now:
+   `git tag run-<n>-<goal-slug>` (next free `n`). The tag is the one pointer to the complete
+   previous run; anything from it is recoverable later with `git show run-<n>-<slug>:<path>`.
 3. **Rewrite the mutable files in place** for the new goal, following Steps 0–2 and 4:
    new `CHARTER.md` and anchor pointer, truncated `work/LEDGER.md` (header only), emptied
    `control/directives/` and `inbox/` (including `resolved/`), and `control/AGENT-STATE.md`

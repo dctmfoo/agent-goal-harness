@@ -64,3 +64,10 @@ Move anything worth keeping to a tracked location before citing it. Prune at uni
 Any stopping point must leave: ledger truthful, the in-progress unit's file honest about
 where it stands, loose ends recorded, everything committed. The next reader — human or
 agent — starts at step 0 and loses nothing.
+
+**When the goal itself is complete** (the charter's success condition is met, or the human
+declares the run closed): make the final state/heartbeat/ledger commit, then tag it —
+`git tag run-<n>-<goal-slug>` (next free `n`; push the tag if the repo has a remote). The
+tag is the run's one durable pointer; a later goal in this repository resets the harness
+files in place against it (see the template's ADOPTION.md, "New goal, same repo"). Tag
+only real completion — never a mid-run stop.
