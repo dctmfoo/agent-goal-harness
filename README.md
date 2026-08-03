@@ -48,6 +48,12 @@ the previous one stopped. No long-document re-reads, no reconstruction from chat
    `harness/` directory plus a short pointer in your agent anchor file — nothing else in
    your repo is touched or reorganized.
 
+   For a **new goal in a repo that already ran one** (the harness is already there from a
+   finished goal), use the same existing-repo prompt — ADOPTION.md's "New goal, same repo"
+   section has the agent tag the finished run and reset the harness files in place. The
+   previous goal's output (code, docs, artifacts) is part of your project now and is never
+   moved; git history and the tag keep the whole old run recoverable.
+
 2. **The agent adopts the template**: it fills in `CHARTER.md` and `AGENTS.md` for your goal,
    names the unit of work, trims what the goal doesn't need, deletes `ADOPTION.md`, and commits.
    Its final report ends with a ready-to-paste **kickoff prompt** for the executing agent. The

@@ -14,6 +14,10 @@ The **content** (charter, anchor, unit of work, findings docs) is what you adapt
   a goal inside it. Their repository is theirs: adopt **minimally and additively**. Follow
   Steps 0–6 with the "Existing repo" adjustments below each step, and read the
   "Existing-repo rules" section first.
+- **New goal, already-adopted repo** — the repository already contains this harness from a
+  previous, finished goal. Do not re-overlay or duplicate anything: follow the
+  "New goal, same repo" section instead of Steps 0–6's file creation (Steps 0–2 and 4 still
+  apply as *rewrites* of the existing files).
 
 **The mode is the human's decision — confirm it before writing anything.** If they haven't
 stated it, look at where you are and **propose**: a non-empty repository with its own history,
@@ -46,6 +50,45 @@ instead?") and wait for their answer. Never restructure someone's repository on 
 
 In existing-repo mode, read every root-relative path in Steps 1–5 (`CHARTER.md`, `control/`,
 `work/`, …) as living under `harness/`.
+
+## New goal, same repo (re-adoption)
+
+A finished run leaves two different kinds of material behind, and they are treated
+differently:
+
+- **The run's output is not run residue.** Code, documents, data, or other artifacts the
+  previous goal produced are now part of the project — they ship, they get maintained, they
+  stay exactly where they are. Archiving a run must never move, rename, or "clean up" the
+  goal's output.
+- **The harness control state is per-goal.** Charter, ledger, directives, inbox, state card,
+  heartbeat — these described the previous run and are reset for the new one.
+
+Git history already is the archive: the previous run committed every loop step, so nothing
+needs to move to be preserved. **Do not relocate old harness files into an archive
+directory** — that churns history, breaks the ledger's relative references, and risks
+dragging goal output along with it.
+
+The procedure, all in place:
+
+1. **Confirm the previous run is actually finished.** Read `control/AGENT-STATE.md`, the
+   ledger, and any unresolved `inbox/` items. If the old run looks mid-flight or has open
+   blocked items, stop and ask the human whether it is abandoned, done, or to be resumed —
+   never overwrite a live run's state on an inference.
+2. **Tag the final commit:** `git tag run-<n>-<goal-slug>` (next free `n`). This is the one
+   pointer to the complete previous run; anything from it is recoverable later with
+   `git show run-<n>-<slug>:<path>`.
+3. **Rewrite the mutable files in place** for the new goal, following Steps 0–2 and 4:
+   new `CHARTER.md` and anchor pointer, truncated `work/LEDGER.md` (header only), emptied
+   `control/directives/` and `inbox/` (including `resolved/`), and `control/AGENT-STATE.md`
+   / `control/HEARTBEAT.md` re-initialized from their templates. Revisit the unit of work
+   (Step 3) — a new goal may have a different natural unit.
+4. **Leave `findings/` accumulating.** Decisions and distilled knowledge from the previous
+   run document output that is still live in the project; they are more valuable to the new
+   run, not archive material. Only the human may decide a findings doc is dead weight.
+5. Commit the reset as a single commit, `adopted: <new goal, one line>` — the new run's
+   baseline — then finish with Step 6's report and kickoff prompt as usual.
+
+The working tree always shows exactly one thing: the current goal.
 
 ## Step 0 — understand the goal
 
