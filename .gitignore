@@ -1,0 +1,11 @@
+# Scratch — never committed, nothing citable lives here
+tmp/
+
+# OS noise
+.DS_Store
+
+# Secrets — never committed regardless of goal
+.env
+.env.*
+*.pem
+*.key
