@@ -68,6 +68,22 @@ place: it exists so a later reader learns something durable without replaying th
 6. Report to the human: the charter summary, the chosen unit of work, anything you trimmed,
    and the open questions from Step 0 you couldn't resolve. The human reviews the charter
    before the run starts.
+7. End your report with the **kickoff prompt** for the human to copy-paste into the executing
+   agent (Codex, Claude Code, …) when they are ready to start the run. The prompt is a
+   constant — the actual goal lives in the repository files, so the prompt itself never
+   carries goal-specific content. Substitute only the project name and absolute path:
+
+   ```
+   /goal You are the executing agent for <project name> at <absolute repo path>. Read its
+   README.md and follow the doc set from there — the charter's invariants and the control/
+   protocol (directives, heartbeat, state) are binding from your first action; everything
+   else is your judgment. Begin at OPERATING-LOOP step 0. This will be a long run: keep the
+   heartbeat, ledger, and commits current so it can be monitored and resumed at any point.
+   ```
+
+   Do not add goal-specific instructions, phases, tool restrictions, or plugin rules to this
+   prompt. If something feels like it belongs in the kickoff prompt, it belongs in the
+   charter, the anchor, or the operating loop instead.
 
 ## What you must NOT do while adopting
 

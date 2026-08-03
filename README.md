@@ -40,8 +40,12 @@ the previous one stopped. No long-document re-reads, no reconstruction from chat
 
 2. **The agent adopts the template**: it fills in `CHARTER.md` and `AGENTS.md` for your goal,
    names the unit of work, trims what the goal doesn't need, deletes `ADOPTION.md`, and commits.
+   Its final report ends with a ready-to-paste **kickoff prompt** for the executing agent. The
+   prompt is a constant — only the project name and path vary, because the goal itself lives in
+   the repository files, not in the prompt.
 
-3. **Review the adopted charter**, then tell the agent to start. From then on you steer by
+3. **Review the adopted charter**, then paste the kickoff prompt into a fresh session of the
+   executing agent (Codex, Claude Code, …) to start the run. From then on you steer by
    dropping `control/directives/D###-*.md` files and monitor via `control/HEARTBEAT.md`,
    `git log`, and `work/LEDGER.md` — without ever interrupting the run.
 
