@@ -15,8 +15,12 @@ The **content** (charter, anchor, unit of work, findings docs) is what you adapt
   Steps 0–6 with the "Existing repo" adjustments below each step, and read the
   "Existing-repo rules" section first.
 
-If the human hasn't said which, look at where you are: a non-empty repository with its own
-history, code, or docs means existing-repo mode. When in doubt, ask.
+**The mode is the human's decision — confirm it before writing anything.** If they haven't
+stated it, look at where you are and **propose**: a non-empty repository with its own history,
+code, or docs suggests existing-repo mode; an empty or near-empty directory suggests a fresh
+repo. State your proposal in one line ("This looks like your existing project — I'd adopt in
+existing-repo mode: everything under `harness/`, nothing else touched. OK, or new repo
+instead?") and wait for their answer. Never restructure someone's repository on an inference.
 
 ## Existing-repo rules (minimal overlay)
 
