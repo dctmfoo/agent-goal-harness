@@ -5,7 +5,8 @@ teaches you something that makes deviation smarter, and record the deviation in
 `findings/DECISIONS.md` when it's structural.
 
 **At every step boundary below (binding, from `control/README.md`):** poll
-`control/directives/` against your cursor, rewrite `control/HEARTBEAT.md`, update
+`control/directives/` against your cursor, confirm every directive in `directives_open`
+still has a live carrier unit in the ledger, rewrite `control/HEARTBEAT.md`, update
 `control/AGENT-STATE.md` if your position or in-flight state changed, and commit completed
 work. This costs seconds and is what keeps a long run steerable and resumable.
 At each poll, also reconcile open `inbox/` items against their `moot if:` condition,
@@ -30,7 +31,10 @@ resolving stale items and keeping heartbeat blockers exact.
      questions opened by earlier units. State a preferred order if one exists. -->
 
 Open the unit's file in `work/` (from `work/UNIT-TEMPLATE.md`) and its ledger row
-(`planned`) before touching anything. Consult `findings/` for applicable priors.
+(`planned`) before touching anything. Consult `findings/` for applicable priors. A unit
+that carries a queued directive names it in the row's `Carries` column and in the unit
+file's `carries:` line; the directive's requirements are part of the unit's definition of
+done, so re-read that directive when the unit opens.
 
 ## 2. Do the work
 
@@ -45,7 +49,10 @@ Open the unit's file in `work/` (from `work/UNIT-TEMPLATE.md`) and its ledger ro
 Write what was observed and concluded into the unit's file with its evidence. Set the ledger
 status honestly (`done`, `refuted`, `blocked`, `abandoned` — a strong negative is a
 first-class result). Distill any durable, reusable lesson into `findings/` in the same close
-commit.
+commit. If the unit carries a directive, append its `## Closed (agent)` block in that same
+commit, or, when the unit ends `refuted`, `blocked` or `abandoned`, re-carry the directive on
+another unit or raise it to `inbox/` — a carried directive never ends with its unit
+silently.
 
 ## 4. Loop — or stall productively
 
@@ -62,7 +69,8 @@ Move anything worth keeping to a tracked location before citing it. Prune at uni
 ## Stopping
 
 Any stopping point must leave: ledger truthful, the in-progress unit's file honest about
-where it stands, loose ends recorded, everything committed. The next reader — human or
+where it stands, every acked directive either closed or carried by a live ledger row, loose
+ends recorded, everything committed. The next reader — human or
 agent — starts at step 0 and loses nothing.
 
 **When the goal itself is complete** (the charter's success condition is met, or the human

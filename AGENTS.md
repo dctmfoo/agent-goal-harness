@@ -7,7 +7,8 @@ Always apply the `unslop` skill (invoke via `/unslop`) to all prose you write: d
 
 - **Goal:** {{ONE_LINE_MISSION}}
 - Start/resume at `control/AGENT-STATE.md`, then `control/HEARTBEAT.md`, the current unit's
-  file in `work/`, any unacked directives, and `work/LEDGER.md`.
+  file in `work/`, any unacked directives, the heartbeat's `directives_open` list, and
+  `work/LEDGER.md`.
 - The control protocol is binding: `control/README.md`. Poll `control/directives/` at every
   operating-loop step boundary and around any operation expected to exceed ten minutes.
 - Charter invariants are binding: `CHARTER.md`.

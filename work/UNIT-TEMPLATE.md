@@ -7,6 +7,7 @@
 - **status:** planned | in-progress | done | refuted | blocked | abandoned
 - **question / goal:** <what this unit is trying to establish or produce, one or two lines>
 - **priors consulted:** <findings/ entries, docs, earlier units — or "none">
+- **carries:** <directives this unit is the carrier for, e.g. D004 — or "none">
 
 ## Log (as you go)
 

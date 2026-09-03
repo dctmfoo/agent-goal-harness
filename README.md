@@ -69,7 +69,9 @@ the previous one stopped. No long-document re-reads, no reconstruction from chat
 
 - **Cheap steering.** A directive is a numbered file; the agent polls the directory listing
   against a cursor at every step boundary. New instructions are noticed in minutes and
-  acknowledged with a committed receipt. Old ones are never re-read.
+  acknowledged with a committed receipt. Old ones are never re-read, and none is forgotten:
+  a directive that cannot be applied at once is carried by a named ledger unit and stays on
+  the heartbeat's `directives_open` line until its close block is written.
 - **Cheap monitoring.** The heartbeat is overwritten, never grows, and is always current.
   `git log --oneline` is a live progress feed because the agent commits per completed step.
 - **Resume is designed-in, not exceptional.** The state card always names the current unit, the

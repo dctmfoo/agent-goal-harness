@@ -48,8 +48,9 @@ and git. {{ADDITIONAL_TOOLS_OR_ACCESS}}
 5. **The control protocol** (`control/README.md`): poll `control/directives/` at every
    operating-loop step boundary (cursor-based — new numbered files only, never re-read old
    ones), keep `control/HEARTBEAT.md` and `control/AGENT-STATE.md` current, commit per
-   completed step. Newer directives override older ones and the standing docs — except
-   invariant 3 above, which no directive can relax.
+   completed step. A directive is done when its close block exists, not when it is acked;
+   a queued one is carried by a named ledger unit until then. Newer directives override
+   older ones and the standing docs — except invariant 3 above, which no directive can relax.
 
 ## Scope guidance (loose)
 
