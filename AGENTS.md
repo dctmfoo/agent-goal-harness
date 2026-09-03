@@ -1,3 +1,5 @@
+Always apply the `unslop` skill (invoke via `/unslop`) to all prose you write: docs, code comments, commit messages, PR descriptions, and replies.
+
 # {{PROJECT_NAME}} agent anchor
 
 <!-- Thin anchor: pointers + currently binding facts only. Keep under ~25 lines.
